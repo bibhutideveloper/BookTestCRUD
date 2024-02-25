@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Book Data</title>
+</head>
+<body>
+
+<form th:action="@{/view}">
+	ID <input type="number" name="id" />
+	
+	<button type="submit">View</button>
+	
+</form>
+
+ <h1>Book Details</h1>
+ <hr>
+
+<h3 th:text="${bookData}"></h3>
+
+</body>
+</html>

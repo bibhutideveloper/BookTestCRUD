@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Books</title>
+</head>
+<body>
+	<h1>All Books</h1>
+	
+	<h2 th:text="${msg}"></h2>
+	
+	<table border=1>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>price</th>
+			<th>Action</th>
+		</tr>
+		<tr th:each="bb : ${books}">
+			<td th:text="${bb.id}"></td>
+			<td th:text="${bb.bookName}"></td>
+			<td th:text="${bb.bookPrice}"></td>
+			<td>
+				<a th:href="@{edit-book/{id}  ( id=${bb.id} ) }">Edit</a>
+							<!-- URL           id from book object      -->
+				<a th:href="@{delete-book/{id}  ( id=${bb.id} ) }">Delete</a>
+			</td>	
+							
+		</tr>
+	</table>
+	
+</body>
+</html>
