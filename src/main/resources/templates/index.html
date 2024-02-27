@@ -9,9 +9,11 @@
 	<h3 th:text="${msg}"></h3>
 
 	<form th:action="@{/save}" th:object="${bookData}" method="POST">
-		<input type="hidden" name="id" th:value=${bookData.id}>
-		name <input type="text" name="bookName" th:value=${bookData.bookName}> <br><br>
-		price <input type="number" name="bookPrice" th:value=${bookData.bookPrice}> <br><br>
+		<input type="hidden" th:field="*{id}" th:value=${bookData.id}>
+		name <input type="text" th:field="*{bookName}" th:value=${bookData.bookName}>
+		<span th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}"></span> <br><br>
+		price <input type="number" th:field="*{bookPrice}" th:value=${bookData.bookPrice} >
+		<span th:if="${#fields.hasErrors('bookPrice')}" th:errors="*{bookPrice}"></span> <br><br>
 		
 		<button type="submit">Save</button>
 		<button type="reset">Reset</button>

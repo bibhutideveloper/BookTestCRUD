@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,12 +26,21 @@ public class BookController {
 	@GetMapping("/")
 	public String showForm(Model model, Book book) {
 		model.addAttribute("bookData", book);
+		
 		return "index"; // file name
 	}
 	
 	// save book to DB
 	@PostMapping("/save")
-	public String saveBook(@ModelAttribute("bookData") Book book, Model model) {
+	public String saveBook(@Validated @ModelAttribute("bookData") Book book, 
+							BindingResult result, Model model) {
+		
+		// hasErrors()
+		
+		if(result.hasErrors()) {
+			System.out.println("Data is not proper.");
+			return "index";
+		}
 		
 		br.save(book);
 		
@@ -118,6 +129,7 @@ public class BookController {
 	 * validation
 	 * Tomcat --> another server   jetty, netty
 	 * Exception
+	 * 
 	 */
 	
 }

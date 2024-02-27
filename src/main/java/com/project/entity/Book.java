@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -18,8 +20,10 @@ public class Book {
 	private Integer id;
 	
 	@Column(name="bname")
+	@NotBlank(message="Enter book name")
 	private String bookName;
 	
+	@NotNull(message="Enter book price")
 	@Column(name="price")
 	private Double bookPrice;
 	
