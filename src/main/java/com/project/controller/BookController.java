@@ -26,7 +26,6 @@ public class BookController {
 	@GetMapping("/")
 	public String showForm(Model model, Book book) {
 		model.addAttribute("bookData", book);
-		
 		return "index"; // file name
 	}
 	
@@ -36,16 +35,13 @@ public class BookController {
 							BindingResult result, Model model) {
 		
 		// hasErrors()
-		
 		if(result.hasErrors()) {
 			System.out.println("Data is not proper.");
 			return "index";
 		}
 		
 		br.save(book);
-		
 		model.addAttribute("msg", "Product added...");
-		
 		return "index";
 	}
 	
@@ -76,61 +72,38 @@ public class BookController {
 		
 		if(opt.isPresent()) {
 			Book book = opt.get();
-			
 			model.addAttribute("bookData", book);
-			
 		}else {
 			model.addAttribute("bookData", "Not Found");
-			
 		}
-		
 		return "book";
 	}
-	
 	
 	// get all books
 	@GetMapping("/all-books")
 	public String getAllBooks(Model model) {
-		
 		List<Book> books = br.findAll();
-		
 		model.addAttribute("books", books);
-		
 		return "all-books";
 	}
-	
 	
 	// edit books
 	@GetMapping("/edit-book/{id}")
 	public String editBook(@PathVariable("id") Integer id, Model model) {
-		
 		Optional<Book> byId = br.findById(id);
-		
 		if(byId.isPresent()) {
 			Book book = byId.get();
-			
 			model.addAttribute("bookData", book);
 		}
-		
 		return "index";
 	}
 	
 	@GetMapping("/delete-book/{id}")
 	public String deleteBook(@PathVariable("id") Integer id, Model model) {
-		
 		br.deleteById(id);
-		
 		model.addAttribute("msg", "Product deleted...");
-		
 		return "redirect:/all-books";
 	}
-	
-	/*
-	 * validation
-	 * Tomcat --> another server   jetty, netty
-	 * Exception
-	 * 
-	 */
 	
 }
 	

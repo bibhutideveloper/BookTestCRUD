@@ -7,19 +7,24 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 @ControllerAdvice
 public class MyException {
 
-	@ExceptionHandler(value=NoResourceFoundException.class)
-	public String exceptionhandler(NoResourceFoundException e) {
+
+	@ExceptionHandler(value=Exception.class)
+	public String exceptionHandler1(Exception e) {
 		
-		return "error-page";
+		return "exception-msg";
 	}
 	
-	
 	@ExceptionHandler(value=ArithmeticException.class)
-	public String exceptionhandler2(ArithmeticException e) {
+	public String exceptionHandler2(ArithmeticException e) {
 		
 		return "arith-page";
 	}
 	
+	@ExceptionHandler(value=NoResourceFoundException.class)
+	public String exceptionHandler3(NoResourceFoundException e) {
+		
+		return "error-page";
+	}
 }
 
 
